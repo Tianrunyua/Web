@@ -146,18 +146,9 @@
     姓名：张楚明   学号：18342125
 	Cal.js
 */
-
-var IsClear = true;  //判断输入前是否已经清空
-
 function get(key)
 {
     var str = document.getElementById("text").value;
-    if(IsClear == false)
-    {
-        str = "";
-        IsClear = true;
-    }
-
     str += key;
     document.getElementById("text").value = str;
 }
@@ -179,13 +170,20 @@ function myEqual()
 {
     var str = document.getElementById("text").value;
     var answer = "";
-    try{
-        eval(str);
-        answer = eval(str);
-    }
-    catch(err){
-        IsClear = false;
+    if(str.indexOf("//") != -1 || str.indexOf("/*") != -1 || str.indexOf("*/") != -1)
+    {
         alert("输入有误,请重新输入!");
+        document.getElementById("text").value = answer;
     }
+
+    else{
+        try{
+            answer = eval(str);
+        }
+        catch(err){
+            alert("输入有误,请重新输入!");
+        }
+    }
+    
     document.getElementById("text").value = answer;
 }
