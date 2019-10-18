@@ -19,7 +19,7 @@
             
             <div class = "main">
                 <div class = "show">
-                    <input type="text" class = "input" id = "text" readonly="readonly" />
+                    <input type="text" class = "input" id = "text"/>
                 </div>
         
                 <div class = "button">
@@ -61,6 +61,12 @@
 	姓名：张楚明   学号：18342125
 	Cal.html网页的Cal.css的样式表
 */
+
+body {
+    background-image: url('timg.jpg');
+    overflow: hidden;
+    background-size: cover;
+}
 
 .Cal {
     position: absolute;
