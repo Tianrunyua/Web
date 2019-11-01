@@ -1,0 +1,191 @@
+<!--
+    张楚明 18342125
+    Fifteen Puzzle.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="Fifteen Puzzle.css">
+    <title>Fifteen Puzzle</title>
+</head>
+<body>
+    <div id = "total">
+        <div><h2 id = "title">Jigsaw puzzle</h2></div>
+        
+        <div id = "main">
+            <img onclick = "move(this)" id = "img1" src = "images/slice_1.png">
+            <img onclick = "move(this)" id = "img2" src = "images/slice_2.png">
+            <img onclick = "move(this)" id = "img3" src = "images/slice_3.png">
+            <img onclick = "move(this)" id = "img4" src = "images/slice_4.png">
+            <img onclick = "move(this)" id = "img5" src = "images/slice_5.png">
+            <img onclick = "move(this)" id = "img6" src = "images/slice_6.png">
+            <img onclick = "move(this)" id = "img7" src = "images/slice_7.png">
+            <img onclick = "move(this)" id = "img8" src = "images/slice_8.png">
+            <img onclick = "move(this)" id = "img9" src = "images/slice_9.png">
+            <img onclick = "move(this)" id = "img10" src = "images/slice_10.png">
+            <img onclick = "move(this)" id = "img11" src = "images/slice_11.png">
+            <img onclick = "move(this)" id = "img12" src = "images/slice_12.png">
+            <img onclick = "move(this)" id = "img13" src = "images/slice_13.png">
+            <img onclick = "move(this)" id = "img14" src = "images/slice_14.png">
+            <img onclick = "move(this)" id = "img15" src = "images/slice_15.png">
+            <img onclick = "move(this)" id = "img16" src = "images/slice_16.png">
+        </div>
+
+        <button id = "begin" type = "button" onclick = "starts()">Restart</button>
+    </div>
+    <script src = "Fifteen Puzzle.js"></script>
+</body>
+</html>
+
+
+
+
+/*
+    张楚明 18342125
+    Fifteen Puzzle.css
+*/
+
+body {
+    background-image: url('total.png');
+    overflow: hidden;
+    background-size: cover;
+}
+
+#total {
+    position: absolute;
+    left: 18%;
+    /* border: red 2px solid; */
+    width: 1000px;
+    height: 800px;
+}
+
+#title {
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 25px;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+}
+
+#main {
+    position: absolute;
+    border: gray 1px solid;
+    left: 70px;
+    width: 860px;
+    height: 635px;
+}
+
+#begin {
+    position: absolute;
+    top: 89%;
+    left: 44%;
+    border: 0px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-family: sans-serif;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    
+}
+
+
+
+
+/*
+    张楚明 18342125
+    Fifteen Puzzle.js
+*/
+var div;
+var click_times;
+
+function starts(){
+    click_times = 0;
+    var x = [100]
+    var y;
+    div = document.getElementById("main");
+    for(var i = 1; i <= 16; ++i){
+        div.removeChild(document.getElementById("img" + i));
+    }
+
+    for(var i = 1; i <= 16; ++i){
+        var img = document.createElement('img');    //动态创建img标签
+        var p = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        var j = Math.round(Math.random() * 15);
+        for(var u = 0; u < x.length; ++u)
+        {
+            if(x[u] == p[j]){
+                y = p[j];
+                break;
+            }
+        }
+        
+        if(p[j] == y){
+            i -= 1;
+            continue;
+        }
+        else{
+            img.setAttribute("src", "images/slice_" + p[j] + ".png");
+            img.setAttribute("onclick", "move(this)");
+            img.id = "img" + p[j];
+        }
+        div.appendChild(img);
+        x.push(p[j]);
+    }
+}
+
+function move(obj){
+    click_times++;
+    var pos;
+    var blank;
+    for(var i = 0; i < 16; ++i){
+        if(obj.id == div.children[i].id)
+            pos = i;
+        if(div.children[i].id == "img16")
+            blank = i;
+    }
+    if(pos == blank)
+        return;
+    else{
+        if(pos + 4 == blank || pos - 4 == blank)
+        {
+            swap(pos, blank);
+        }
+        else if(pos + 1 == blank && blank != 4 && blank != 8 && blank != 12){
+            swap(pos, blank);
+        }
+        else if(pos - 1 == blank && blank != 3 && blank != 7 && blank != 11 && blank != 15){
+            swap(pos, blank);
+        }
+    }
+}
+
+function swap(pos, blank) {
+    var temp1 = div.children[pos].cloneNode(true);
+    var temp2 = div.children[blank].cloneNode(true);;
+    div.replaceChild(temp1, div.children[blank]);
+    div.replaceChild(temp2, div.children[pos]);
+    isFinish();
+}
+
+function isFinish() {
+    var judge = 1;
+    for(var i = 0; i < 16; ++i){
+        if(div.children[i].id != ("img" + (i + 1))){
+            judge = 0;
+            break;
+        }
+    }
+
+    if(judge == 1){
+        alert("恭喜你完成了拼图!\n共用次数: " + click_times + " 次");
+    }
+    return;
+}
