@@ -76,8 +76,9 @@ body {
     position: absolute;
     border: gray 1px solid;
     left: 70px;
-    width: 860px;
-    height: 635px;
+    width: 840px;
+    height: 620px;
+    font-size: 0;       /*消除回车换行带来的间隔*/
 }
 
 #begin {
@@ -111,8 +112,9 @@ function starts(){
     var x = [100]
     var y;
     div = document.getElementById("main");
-    for(var i = 1; i <= 16; ++i){
-        div.removeChild(document.getElementById("img" + i));
+    var length = div.children.length;
+    for(var i = 0; i < length; ++i){
+        div.removeChild(div.children[0]);
     }
 
     for(var i = 1; i <= 16; ++i){
