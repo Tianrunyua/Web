@@ -112,11 +112,14 @@ function starts(){
     var x = [100]
     var y;
     div = document.getElementById("main");
+    
+    //删除div里所有子节点
     var length = div.children.length;
     for(var i = 0; i < length; ++i){
         div.removeChild(div.children[0]);
     }
 
+    //重新把拼图块随机排列放入div
     for(var i = 1; i <= 16; ++i){
         var img = document.createElement('img');    //动态创建img标签
         var p = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -141,6 +144,29 @@ function starts(){
         div.appendChild(img);
         x.push(p[j]);
     }
+
+    //以下用来保证拼图是可以完成的
+    var is_capable = 0;
+    for(var i = 0; i < 16; ++i)
+    {
+        for(var j = i + 1; j < 16; ++j)
+        {
+            if(div.children[i].id.length > div.children[j].id.length || (div.children[i].id.length == div.children[j].id.length && div.children[i].id > div.children[j].id))
+            {
+                // alert(i + "  " + div.children[i].id + "  " + j + "   " + div.children[j].id)
+                is_capable++;
+            }
+        }
+        if(div.children[i].id == "img16")
+        {
+            var row = Math.floor((i / 4) + 1);
+            var col = (i % 4) + 1;
+            is_capable = is_capable + row + col;
+        }
+        // alert(is_capable);
+    }
+    if(is_capable % 2 != 0)
+        starts();
 }
 
 function move(obj){
@@ -156,8 +182,7 @@ function move(obj){
     if(pos == blank)
         return;
     else{
-        if(pos + 4 == blank || pos - 4 == blank)
-        {
+        if(pos + 4 == blank || pos - 4 == blank){
             swap(pos, blank);
         }
         else if(pos + 1 == blank && blank != 4 && blank != 8 && blank != 12){
@@ -185,9 +210,8 @@ function isFinish() {
             break;
         }
     }
-
     if(judge == 1){
         alert("恭喜你完成了拼图!\n共用次数: " + click_times + " 次");
     }
-    return;
 }
+
