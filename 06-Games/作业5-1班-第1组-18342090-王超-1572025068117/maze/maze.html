@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 18342090 王超 -->
+<!-- maze.html - HTML of Maze Game -->
+<!-- 
+    Features:
+    1. All features required by the homework
+    2. Hand-drawn style map including irregular route
+
+    Notes:
+    1. External libraries used:
+        - rough.js(https://roughjs.com/, MIT License): Generate hand-drawn style graphics
+        - FontFaceObserver(https://fontfaceobserver.com/, BSD-3-Clause): Make @font-face supports 'onload' event
+    2. In modern browsers like Firefox, Chrome and Microsoft Edge Chromium, game map are dynamically generated;
+       In some browsers like Microsoft Edge, game map is loaded from pre-built images.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mouse Maze</title>
+    <link href="https://fonts.loli.net/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="maze.css">
+</head>
+<body>
+    <header>
+        <h1>Mouse Maze</h1>
+        <p>Move your mouse over the "S" to begin.</p>
+        <p id="message">
+            Here we go!
+        </p>
+    </header>
+    <main>
+        <canvas id="mainCanvas" width="1920" height="1080"></canvas>
+        <p>
+            The object of this game is to guide mouse cursor through the start area
+            and get to the end area.
+        </p>
+        <p>
+            Be sure to avoid the walls:
+        </p>
+        <canvas id="wallExample" width="200" height="100"></canvas>
+        <p>Good luck!</p>
+    </main>
+    <script src="fontfaceobserver.standalone.js"></script>
+    <script src="rough.js"></script>
+    <script src="maze.js"></script>
+</body>
+</html>

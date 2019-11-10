@@ -1,0 +1,161 @@
+/**
+ * 18342090 王超
+ * whac-a-mole.css - Stylesheet for Whac-a-mole Game
+ */
+html, body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: 'Lato';
+    font-size: 18px;
+    background-color: rgb(14, 131, 205);
+}
+
+header {
+    margin: 0;
+    padding: 12px 0;
+    color: white;
+}
+
+header h1, header p {
+    margin: 0;
+    padding: 12px 0;
+    font-weight: 400;
+}
+
+.instructions {
+    margin: 0 auto;
+    padding: 24px 0;
+    max-width: 800px;
+    text-align: left;
+    color: white;
+}
+.instructions ol {
+    margin: 12px 0;
+    text-align: left;
+}
+.instructions li {
+    margin: 8px 0;
+}
+
+
+button {
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.15;
+    margin: 0;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+}
+
+#btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 24px 0;
+    background-color: rgb(32, 99, 167);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    cursor: pointer;
+}
+
+#btn .progress {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+main {
+    background-color: rgb(14, 131, 205);
+}
+
+#boxes {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 12px 0;
+    opacity: .5;
+    transition: opacity .1s;
+}
+#boxes.running {
+    opacity: 1;
+}
+#boxes .line {
+    display: flex;
+    margin: 24px 0;
+}
+#boxes .mole {
+    display: block;
+    position: relative;
+    flex: 1;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+#boxes .mole input {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+#boxes .mole input::-ms-check {
+    display: block;
+    margin-top: 9px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    color: transparent;
+    background: white;
+    opacity: .6;
+}
+#boxes .mole input::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 9px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    opacity: .6;
+    transition: all .1s;
+    transform: translateX(-50%);
+}
+#boxes .mole input:checked::before {
+    opacity: 1;
+}
+#boxes .mole input:checked::-ms-check {
+    opacity: 1;
+}
+#boxes .mole.wrong input::before {
+    opacity: .2;
+}
+#boxes .mole.wrong input::-ms-check {
+    opacity: .2;
+}
+#boxes .mole svg {
+    position: absolute;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    transform: translateX(-50%);
+}
+#boxes .mole svg path {
+    stroke-width: 5px;
+    stroke: rgb(253, 252, 211);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 18342090 王超 -->
+<!-- whac-a-mole.html - HTML of Whac-a-mole Game -->
+<!-- 
+    Features: 
+    1. All features required by the homework
+    2. More user-friendly UI with SVG animation
+
+    Notes:
+    1. It's my first attempt to use SVG animation to build Web UI.
+       The animated radio buttons was implemented by Tympanus Codrops: https://tympanus.net/codrops/2013/10/15/animated-checkboxes-and-radio-buttons-with-svg.
+       The progressive button was also implemented by Tympanus: https://tympanus.net/Development/ProgressButtonStyles/.
+       Although the articles are written in 2013, the animation effects still look COOL nowadays.
+       Thank you Tympanus! This website is full of creative web designs with impressive implementations.
+    
+    2. It's also my first attempt to use window.requestAnimationFrame.
+       The main reason is...I don't want to manage CSS Transition/Animation on my own.
+       Syncing my timer with CSS Animation sounds a little bit troublesome.
+    
+    3. Yeah it's always Microsoft Edge that likes to behave differently from other browsers.
+       Since MSEdge doesn't support ::before pesudo element of <input>, I had to implement the customized radio button styles using ::-ms-check,
+       which only allows a subset of CSS properties excluding transition. So there will be a small difference between MSEdge and other modern browsers.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Whac-a-mole</title>
+    <link href="https://fonts.loli.net/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="whac-a-mole.css">
+</head>
+<body>
+    <header>
+        <h1>Whac-a-mole</h1>
+        <p>Test your skill. How many boxes(moles) can you check(hit) in 30 seconds?</p>
+    </header>
+    <main>
+        <button id="btn">
+            <span class="message">Start Game</span>
+            <span class="progress"></span>
+        </button>
+        <div id="boxes"></div>
+        <div class="instructions">
+            Instructions:
+            <ol>
+                <li>Click on the radio buttons(moles) as they are selected randomly by the computer.</li>
+                <li>1 point per hit, minus 1 point per miss.</li>
+            </ol>
+        </div>
+    </main>
+    <script src="whac-a-mole.js"></script>
+</body>
+</html>
